@@ -9,11 +9,14 @@
 
     <body>
         <div class="calculator-container">
-            <div class="operation-screen"></div>
+            <div class="operation-screen-container">
+                <div class="screen-top"></div>
+                <div class="screen-bottom"></div>
+            </div>
 
             <div class="line-container">
-                <button>CLEAR</button>
-                <button>DELETE</button>
+                <button id="clear">CLEAR</button>
+                <button id="delete">DELETE</button>
             </div>
 
             <div class="line-container">
@@ -40,7 +43,7 @@
             <div class="line-container">
                 <button type="button" value=".">.</button>
                 <button type="button" value="0">0</button>
-                <button type="button" value="=">=</button>
+                <button id="equals" type="button" value="=">=</button>
                 <button type="button" value="+">+</button>
             </div>
         </div>

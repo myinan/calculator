@@ -18,11 +18,24 @@ html {
     flex-wrap: wrap;
 }
 
-.operation-screen {
+.operation-screen-container {
     width: 360px;
     height: 120px;
-    background-color: #1f2937;
-    border-radius: 10px;
+    border-radius: 10px; 
+    display: flex;
+    flex-direction: column;
+}
+
+.screen-top {
+    flex: 1;
+    background-color: rgb(69, 105, 102);
+    word-wrap: break-word;
+    text-align: right;
+}
+
+.screen-bottom {
+    flex: 1;
+    background-color: rgb(69, 105, 102);
     word-wrap: break-word;
     text-align: right;
 }
@@ -46,4 +59,12 @@ button {
     font-family: Arial, Helvetica, sans-serif;
     cursor: pointer;
     border: none;
+}
+
+button#clear {
+    background-color: #aaf;
+}
+
+button#delete {
+    background-color: #d88;
 }
