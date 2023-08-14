@@ -1,3 +1,103 @@
+// Define function for calculator operations
+function operate(firstNum, operator, secondNum) {
+    switch (operator) {
+        case "+":
+            return +firstNum + +secondNum;
+        case "-":
+            return +firstNum - +secondNum;
+        case "*":
+            return +firstNum * +secondNum;
+        case "/":
+            return +firstNum / +secondNum;
+   };
+};
+
+
+// Declare variables
+let arguments = {};
+const operators = ["+", "-", "*", "/"];
+const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+
+// Access HTML elements
+const screenTop = document.querySelector(".screen-top");
+const screenBottom = document.querySelector(".screen-bottom");
+const calculator = document.querySelector(".calculator-container");
+
+
+// Event delegation and handlers
+calculator.addEventListener("click", (event) => {
+    const targetValue = event.target.value;
+
+    function handleNumberClick(number) {
+        screenBottom.textContent += number;
+    }
+
+    function handleOperatorClick(operator) {
+        if (screenBottom.textContent != "") {
+            arguments.firstNum = screenBottom.textContent;
+            arguments.operator = operator;
+            screenBottom.textContent += operator;
+        }
+        else return;
+    }
+
+    function handleEqualsClick() {
+        if (screenBottom.textContent != "") {
+            let bottomArray = Array.from(screenBottom.textContent);
+            bottomArray.forEach(item => {
+                if (operators.includes(item)) {
+                    screenTop.textContent = screenBottom.textContent;
+                    screenBottom.textContent = "";
+                    console.log(bottomArray);
+                    return;
+                }
+                else return;
+            });
+        }
+        else return;
+    }
+
+    // Handle different button clicks based on their value
+    if (numbers.includes(targetValue)) {
+        handleNumberClick(targetValue);
+    } else if (operators.includes(targetValue)) {
+        handleOperatorClick(targetValue);
+    } else if (targetValue === "=") {
+        handleEqualsClick();
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 
 // Define function for calculator operations
