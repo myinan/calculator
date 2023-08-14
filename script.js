@@ -1,3 +1,5 @@
+/*
+
 // Define function for calculator operations
 function operate(firstNum, operator, secondNum) {
     switch (operator) {
@@ -80,3 +82,4 @@ calculator.addEventListener("click", item => {
         equals.value = "";
     }
 });
+*/
