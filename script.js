@@ -14,7 +14,6 @@ function operate(firstNum, operator, secondNum) {
 
 
 // Declare variables
-let arguments = {};
 const operators = ["+", "-", "*", "/"];
 const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
@@ -30,26 +29,34 @@ calculator.addEventListener("click", (event) => {
     const targetValue = event.target.value;
 
     function handleNumberClick(number) {
+        if (screenBottom.textContent == "" && number == 0) return;
         screenBottom.textContent += number;
     }
 
     function handleOperatorClick(operator) {
         if (screenBottom.textContent != "") {
-            arguments.firstNum = screenBottom.textContent;
-            arguments.operator = operator;
+            if (operators.includes(screenBottom.textContent[screenBottom.textContent.length - 1])) return;
+            
             screenBottom.textContent += operator;
         }
         else return;
     }
 
+    //Populate arguments object and call the operate() function
     function handleEqualsClick() {
         if (screenBottom.textContent != "") {
             let bottomArray = Array.from(screenBottom.textContent);
+            console.log(bottomArray);
             bottomArray.forEach(item => {
-                if (operators.includes(item)) {
+                console.log(item);
+                if (bottomArray.indexOf(item) !== 0 && operators.includes(item)) {
+                    let firstNum = screenBottom.textContent.slice(0, screenBottom.textContent.indexOf(item));
+                    let operator = item;
+                    let secondNum = screenBottom.textContent.slice(screenBottom.textContent.indexOf(item) + 1);
+                    if (secondNum == "") return;
+                    let solution = operate(firstNum, operator, secondNum);
                     screenTop.textContent = screenBottom.textContent;
-                    screenBottom.textContent = "";
-                    console.log(bottomArray);
+                    screenBottom.textContent = solution;
                     return;
                 }
                 else return;
