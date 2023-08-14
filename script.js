@@ -36,9 +36,14 @@ calculator.addEventListener("click", (event) => {
     function handleOperatorClick(operator) {
         if (screenBottom.textContent != "") {
             if (operators.includes(screenBottom.textContent[screenBottom.textContent.length - 1])) return;
-            
-            screenBottom.textContent += operator;
+            arr = Array.from(screenBottom.textContent);
+            filteredArr = arr.filter( item => operators.includes(item));
+            if (filteredArr.length == 0) screenBottom.textContent +=operator;
+            else if (filteredArr.length == 1 && screenBottom.textContent[0] == "-") {
+                screenBottom.textContent +=operator;
+            } else if (filteredArr.length > 1) return;
         }
+        else if (screenBottom.textContent == "" && operator == "-") screenBottom.textContent +=operator;
         else return;
     }
 
@@ -46,10 +51,26 @@ calculator.addEventListener("click", (event) => {
     function handleEqualsClick() {
         if (screenBottom.textContent != "") {
             let bottomArray = Array.from(screenBottom.textContent);
-            console.log(bottomArray);
             bottomArray.forEach(item => {
-                console.log(item);
-                if (bottomArray.indexOf(item) !== 0 && operators.includes(item)) {
+                if (item == "-") {
+                    let indices = [];
+                    let idx = screenBottom.textContent.indexOf(item);
+                    while (idx !== -1) {
+                        indices.push(idx);
+                        idx = screenBottom.textContent.indexOf(item, idx + 1);
+                    }
+                    if (indices.length > 1) {
+                        let firstNum = screenBottom.textContent.slice(0, indices[indices.length - 1]);
+                        let operator = item;
+                        let secondNum = screenBottom.textContent.slice(indices[indices.length - 1] + 1);
+                        if (secondNum == "") return;
+                        let solution = operate(firstNum, operator, secondNum);
+                        screenTop.textContent = screenBottom.textContent;
+                        screenBottom.textContent = solution;
+                        return;
+                    }
+                }
+                else if (operators.includes(item)) {
                     let firstNum = screenBottom.textContent.slice(0, screenBottom.textContent.indexOf(item));
                     let operator = item;
                     let secondNum = screenBottom.textContent.slice(screenBottom.textContent.indexOf(item) + 1);
