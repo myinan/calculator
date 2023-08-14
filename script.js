@@ -51,29 +51,11 @@ calculator.addEventListener("click", (event) => {
     function handleEqualsClick() {
         if (screenBottom.textContent != "") {
             let bottomArray = Array.from(screenBottom.textContent);
-            bottomArray.forEach(item => {
-                if (item == "-") {
-                    let indices = [];
-                    let idx = screenBottom.textContent.indexOf(item);
-                    while (idx !== -1) {
-                        indices.push(idx);
-                        idx = screenBottom.textContent.indexOf(item, idx + 1);
-                    }
-                    if (indices.length > 1) {
-                        let firstNum = screenBottom.textContent.slice(0, indices[indices.length - 1]);
-                        let operator = item;
-                        let secondNum = screenBottom.textContent.slice(indices[indices.length - 1] + 1);
-                        if (secondNum == "") return;
-                        let solution = operate(firstNum, operator, secondNum);
-                        screenTop.textContent = screenBottom.textContent;
-                        screenBottom.textContent = solution;
-                        return;
-                    }
-                }
-                else if (operators.includes(item)) {
-                    let firstNum = screenBottom.textContent.slice(0, screenBottom.textContent.indexOf(item));
+            bottomArray.forEach((item, index) => {
+                if (index != 0 && operators.includes(item)) {
+                    let firstNum = screenBottom.textContent.slice(0, index);
                     let operator = item;
-                    let secondNum = screenBottom.textContent.slice(screenBottom.textContent.indexOf(item) + 1);
+                    let secondNum = screenBottom.textContent.slice(index + 1);
                     if (secondNum == "") return;
                     let solution = operate(firstNum, operator, secondNum);
                     screenTop.textContent = screenBottom.textContent;
