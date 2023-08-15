@@ -8,6 +8,10 @@ function operate(firstNum, operator, secondNum) {
         case "*":
             return +firstNum * +secondNum;
         case "/":
+            if (secondNum == 0){
+                alert("Cant divide by 0!");
+                return;
+            }
             return +firstNum / +secondNum;
    };
 };
@@ -29,7 +33,7 @@ calculator.addEventListener("click", (event) => {
     const targetValue = event.target.value;
 
     function handleNumberClick(number) {
-        if (screenBottom.textContent == "" && number == 0) return;
+        if (screenBottom.textContent == "0" && number == 0) return;
         screenBottom.textContent += number;
     }
 
@@ -59,7 +63,7 @@ calculator.addEventListener("click", (event) => {
                     if (secondNum == "") return;
                     let solution = operate(firstNum, operator, secondNum);
                     screenTop.textContent = screenBottom.textContent;
-                    screenBottom.textContent = solution;
+                    screenBottom.textContent = +solution.toFixed(3);
                     return;
                 }
                 else return;
@@ -79,12 +83,17 @@ calculator.addEventListener("click", (event) => {
 });
 
 
+// Event handler for "clear" and "delete" buttons
+calculator.addEventListener("click", (event) => {
+    const targetId = event.target.id;
 
-
-
-
-
-
+    if (targetId == "clear") {
+        screenTop.textContent = "";
+        screenBottom.textContent = "";
+    } else if (targetId == "delete") {
+        screenBottom.textContent = screenBottom.textContent.slice(0, -1)
+    }
+});
 
 
 
