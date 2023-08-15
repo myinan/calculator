@@ -65,10 +65,10 @@ button {
     border: none;
 }
 
-button#clear {
+button#Backspace {
     background-color: #aaf;
 }
 
-button#delete {
+button#Delete {
     background-color: #d88;
 }
